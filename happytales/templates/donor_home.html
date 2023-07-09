@@ -1,0 +1,105 @@
+{% extends 'nav_donor.html' %}
+{% load static %}
+{% block title %}Donor Home{% endblock title %}
+{% block main-content %}
+
+<div class="container shadow-lg p-5">
+    <h3 class="text-center">Donor Profile</h3>
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="container mt-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<!--          1st row      -->
+ <div class="row">
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> First Name </b></label>
+            <input type="text" class="form-control mb-2" name="fname" value="{{donor.user.first_name}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Last Name </b></label>
+            <input type="text" class="form-control mb-2" name="lname" value="{{donor.user.last_name}}" required>
+        </div>
+    </div>
+
+ <!--  2nd Row  -->
+    <div class="row">
+        <div class="form-group col-md-12">
+        <label class="mb-2"><b> Contact Number </b></label>
+            <input type="number" class="form-control mb-2" name="contact" value="{{donor.mobile}}" required>
+        </div>
+    </div>
+
+<!--  3rd Row  -->
+    <div class="row">
+        <div class="form-group col-md-12">
+        <label class="mb-2"><b> Email ID </b></label>
+            <input type="email" class="form-control mb-2" readonly name="email" value="{{donor.user.username}}" required>
+        </div>
+    </div>
+ <!--  4th Row  -->
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Gender </b></label>
+{% if donor.gender == "Male" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male" checked>
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female">
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others">
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% elif donor.gender == "Female" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male">
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female" checked>
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others">
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% else %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male">
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female">
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others" checked>
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Image </b></label>
+            <input type="file" class="form-control mb-2" name="image" accept="image/*">
+        </div>
+    </div>
+ <input type="submit" value="Submit" class="btn btn-primary my-3" style="width:200px">
+                </form>
+        </div>
+<div class="col-sm-4 mt-5 text-center">
+    <img src="{{donor.image.url}}" width="300px" height="300px">
+</div>
+    </div>
+</div>
+{% endblock main-content %}

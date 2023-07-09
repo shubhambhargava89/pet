@@ -1,0 +1,44 @@
+{% extends 'nav_donor.html' %}
+{% load static %}
+{% block title %}Adopter List{% endblock title %}
+{% block main-content %}
+
+<div class="container shadow-lg pt-5 pb-2">
+    <h3 class="text-center mb-4" style="color:darkgreen">Adopter List</h3>
+<div class="container">
+<table class="table table-hover" id="example">
+    <thead>
+    <tr style="background-color: #000080; color:white">
+        <th>Sr. No.</th>
+        <th>Full Name</th>
+        <th>Email ID</th>
+        <th>Contact Number</th>
+        <th>Pet Name</th>
+        <th>Image</th>
+        <th>Apply Date</th>
+        <th>Adopter Details</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for i in data %}
+    {% if request.user.id  == i.pet.donor.user.id %}
+    <tr style="background-color: #DEB887 ">
+        <td>{{forloop.counter}}</td>
+        <td>{{i.adopter.user.first_name}} {{i.adopter.user.last_name}}</td>
+        <td>{{i.adopter.user.username}}</td>
+        <td>{{i.adopter.mobile}}</td>
+        <td>{{i.pet.pet_name}}</td>
+        <td><img src="{{i.adopter.image.url}}" style="width:100px; height:100px; border-radius:50%"></td>
+        <td>{{i.applydate}}</td>
+        <td><a href="{% url 'adopter_details' i.id%}">View Adopter Details</a></td>
+
+
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock main-content %}

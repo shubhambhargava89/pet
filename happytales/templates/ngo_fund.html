@@ -1,0 +1,55 @@
+{% extends 'nav_ngo.html' %}
+{% load static %}
+{% block title %}Fundraising{% endblock title %}
+{% block main-content %}
+
+<div class="container shadow-lg p-5">
+    <h3 class="text-center">Fund Raising</h3>
+            <form class="container mt-5 " method="post" enctype="multipart/form-data" id="myform">
+    {% csrf_token %}
+<!--          1st row      -->
+ <div class="row">
+        <div class="form-group col-md-12">
+            <label class="mb-2"><b> First Name </b></label>
+            <input type="text" class="form-control mb-2" name="fname" placeholder="Enter First Name" required>
+        </div>
+ </div>
+      <!--  2nd Row  -->
+ <div class="row">
+        <div class="form-group col-md-12">
+            <label class="mb-2"><b> Last Name </b></label>
+            <input type="text" class="form-control mb-2" name="lname" placeholder="Enter Last Name" required>
+        </div>
+    </div>
+
+ <!--  3rd Row  -->
+    <div class="row">
+        <div class="form-group col-md-12">
+        <label class="mb-2"><b> Contact Number </b></label>
+            <input type="number" class="form-control mb-2" name="contact" placeholder="Enter Contact Number" required>
+        </div>
+       </div>
+      <!--  2nd Row  -->
+ <div class="row">
+        <div class="form-group col-md-12">
+        <label class="mb-2"><b> Amount </b></label>
+            <input type="number" class="form-control mb-2"  name="amount" placeholder="Enter Amount" required>
+        </div>
+    </div>
+                <input type="submit" value="Submit" class="btn btn-primary my-3" style="width:200px">
+    </form>
+        </div>
+
+{% if error == "no" %}
+<script>
+    alert("Make Payment");
+    window.location = ('{% url 'ngo_pay' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, Try Again...");
+</script>
+{% endif %}
+{% endblock main-content %}

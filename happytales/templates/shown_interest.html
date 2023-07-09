@@ -1,0 +1,35 @@
+{% extends 'nav_adopter.html' %}
+{% load static %}
+{% block title %}Shown Interest{% endblock title %}
+{% block main-content %}
+<div class="container shadow-lg p-5">
+    <h3 class="text-center">Shown Interest</h3>
+    <div class="container shadow-lg py-2 mb-2">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <label class="font-weight-bold">Shown Interest </label>
+         <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="interest" value="Yes">
+                    <label class="custom-control-label" for="customRadioInline1">Yes</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="interest" value="No">
+                    <label class="custom-control-label" for="customRadioInline2">No</label>
+                </div>
+            </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-success mt-3">
+</form>
+</div>
+</div>
+
+{% if error == "done" %}
+<script>
+    alert("Shown Interest Submitted Successfully");
+    window.location = ('{% url 'adopter_petlist' %}')
+</script>
+{% endif %}
+
+{% endblock main-content%}

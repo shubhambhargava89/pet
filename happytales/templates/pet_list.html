@@ -1,0 +1,38 @@
+{% extends 'nav_donor.html' %}
+{% load static %}
+{% block title %}Pet List{% endblock title %}
+{% block main-content %}
+
+<div class="container shadow-lg pt-5 pb-2">
+    <h3 class="text-center mb-4" style="color:darkgreen">Pet List</h3>
+<div class="container">
+<table class="table table-hover" id="example">
+    <thead>
+    <tr style="background-color: #000080; color:white">
+        <th>Sr. No.</th>
+        <th>Pet Name</th>
+        <th>Pet Breed</th>
+        <th>Price</th>
+        <th>Creation Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for i in pet %}
+    <tr style="background-color: #DEB887 ">
+        <td>{{forloop.counter}}</td>
+        <td>{{i.pet_name}}</td>
+        <td>{{i.pet_breed}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.creationdate}}</td>
+
+        <td><a href="{% url 'edit_pet' i.id %}" class="btn btn-success btn-sm">Edit</a>
+        | <a href="{% url 'delete_pet' i.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock main-content %}

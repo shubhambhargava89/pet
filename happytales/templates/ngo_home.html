@@ -1,0 +1,114 @@
+{% extends 'nav_ngo.html' %}
+{% load static %}
+{% block title %}NGO Home{% endblock title %}
+{% block main-content %}
+
+<div class="container shadow-lg p-5">
+    <h3 class="text-center">NGO Profile</h3>
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="container mt-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<!--          1st row      -->
+ <div class="row">
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> First Name </b></label>
+            <input type="text" class="form-control mb-2" name="fname" value="{{ngo.user.first_name}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Last Name </b></label>
+            <input type="text" class="form-control mb-2" name="lname" value="{{ngo.user.last_name}}" required>
+        </div>
+    </div>
+
+ <!--  2nd Row  -->
+    <div class="row">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Contact Number </b></label>
+            <input type="number" class="form-control mb-2" name="contact" value="{{ngo.mobile}}" required>
+        </div>
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> NGO Name </b></label>
+            <input type="text" class="form-control mb-2" readonly name="ngoname" value="{{ngo.ngo_name}}" required>
+        </div>
+    </div>
+
+<!--  3rd Row  -->
+    <div class="row">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Email ID </b></label>
+            <input type="email" class="form-control mb-2" readonly name="email" value="{{ngo.user.username}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Reg ID </b></label>
+            <input type="email" class="form-control mb-2" readonly name="reg" value="{{ngo.reg_id}}" required>
+        </div>
+    </div>
+ <!--  4th Row  -->
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Gender </b></label>
+{% if ngo.gender == "Male" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male" checked>
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female">
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others">
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% elif ngo.gender == "Female" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male">
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female" checked>
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others">
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% else %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="gender" value="Male">
+                    <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="gender" value="Female">
+                    <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="gender" value="Others" checked>
+                    <label class="custom-control-label" for="customRadioInline3">Others</label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Image </b></label>
+            <input type="file" class="form-control mb-2" name="image" accept="image/*">
+        </div>
+    </div>
+ <input type="submit" value="Submit" class="btn btn-primary my-3" style="width:200px">
+                </form>
+        </div>
+<div class="col-sm-4 mt-5 text-center">
+    <img src="{{ngo.image.url}}" width="300px" height="300px">
+</div>
+    </div>
+</div>
+{% endblock main-content %}

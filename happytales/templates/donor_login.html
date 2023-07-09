@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Donor Login{% endblock title %}
+{% block main-content %}
+<hr>
+<div class="container">
+ <div class="row my-3">
+  <div class="col-sm-6 offset-sm-3">
+   <h3>Donor Login</h3>
+   <hr>
+   <form method="post" novalidate class="shadow p-5">
+    {% csrf_token%}
+    <label class="mb-2"><b>User Name</b></label>
+    <input type="text" class="form-control mb-2" name="uname" placeholder="Enter UserName">
+
+     <label class="mb-2"><b>Password</b></label>
+    <input type="password" class="form-control mb-2" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+*!=])(?=.*\d).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="pwd" placeholder="Enter Password">
+
+<!--    <small><a href="{% url 'password_reset' %}" class="text-danger">Forgot Password?</a></small><br>-->
+    <input type="submit" class="btn btn-primary mt-4">
+
+     <a href="{% url 'donor_signup' %}" class="btn btn-primary mt-4" style="margin-left:2%; margin-top:2%; color:darkcolor;">Don't Have a Account?? Create one..</a>
+
+    <br>
+<!--    <div class="text-center text-primary fw-bold">-->
+<!--        <small>New?<a href="{% url 'customerregistration' %}" class="text-danger">Register Now</a></small>-->
+<!--     </div>-->
+
+
+   </form>
+
+  </div>
+ </div>
+</div>
+
+
+{% if error == "no" %}
+<script>
+    alert("login Successful");
+    window.location = ('{% url 'donor_home' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid Login Credentials, Try Again...");
+</script>
+{% endif %}
+
+
+
+{% endblock main-content %}

@@ -1,0 +1,160 @@
+{% extends 'nav_donor.html' %}
+{% load static %}
+{% block title %}Edit Pet{% endblock title %}
+{% block main-content %}
+
+
+<div class="container shadow-lg pt-5">
+    <h3 class="text-center" style="color:darkgreen">Edit Details</h3>
+    <div class="row">
+    <div class="col-sm-8">
+<form class="container mt-5" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-12 ">
+        <label class="mb-2"><b> Pet Name </b></label>
+            <input type="text" class="form-control" name="name" value="{{pet.pet_name}}" required>
+        </div>
+    </div>
+<!--  1st Row  -->
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Pet Type </b></label>
+            {% if pet.pet_type == "Dog" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="pettype" value="Dog" checked>
+                    <label class="custom-control-label" for="customRadioInline1">Dog</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="pettype" value="Cat">
+                    <label class="custom-control-label" for="customRadioInline2">Cat</label>
+                </div>
+            </div>
+            {% else %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" class="custom-control-input" name="pettype" value="Dog">
+                    <label class="custom-control-label" for="customRadioInline1">Dog</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" class="custom-control-input" name="pettype" value="Cat" checked>
+                    <label class="custom-control-label" for="customRadioInline2">Cat</label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Vaccinated </b></label>
+            {% if pet.vaccinated == "Yes" %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="vaccination" value="Yes" Checked>
+                    <label class="custom-control-label" for="customRadioInline1">Yes</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline4" class="custom-control-input" name="vaccination" value="No">
+                    <label class="custom-control-label" for="customRadioInline2">No</label>
+                </div>
+            </div>
+            {% else %}
+            <div style="border:1px solid lightgrey; padding:6px; border-radius:6px">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" class="custom-control-input" name="vaccination" value="Yes">
+                    <label class="custom-control-label" for="customRadioInline1">Yes</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline4" class="custom-control-input" name="vaccination" value="No" Checked>
+                    <label class="custom-control-label" for="customRadioInline2">No</label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!--  2nd Row  -->
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Post Date </b></label><span style="color:red">[{{pet.post_date}}]</span>
+            <input type="date" class="form-control" name="postdate" >
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Pet Breed </b></label>
+            <input type="Text" class="form-control" name="breed" value="{{pet.pet_breed}}" required>
+        </div>
+    </div>
+
+<!--  3rd Row  -->
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Price </b></label>
+            <input type="Text" class="form-control" name="price" value="{{pet.price}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Location </b></label>
+            <input type="Text" class="form-control" name="location" value="{{pet.location}}" required>
+        </div>
+    </div>
+
+
+<!--  4th Row  -->
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Age (In Years) </b></label>
+            <input type="number" class="form-control" name="age" value="{{pet.age}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Colour </b></label>
+            <input type="text" class="form-control" name="color" value="{{pet.color}}" required>
+        </div>
+    </div>
+
+     <!--  5th Row  -->
+<div class="row mt-3">
+        <div class="form-group col-md-6">
+        <label class="mb-2"><b> Weight </b></label>
+            <input type="number" class="form-control" name="weight" value="{{pet.weight}}" required>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="mb-2"><b> Image </b></label>
+            <input type="file" class="form-control" name="image" required accept="image/*">
+        </div>
+    </div>
+
+    <!--  6th Row  -->
+<div class="row mt-3">
+        <div class="form-group col-md-12">
+        <label class="mb-2"><b> Description </b></label>
+            <textarea class="form-control" name="description" required>{{pet.description}}</textarea>
+        </div>
+    </div>
+<input type="submit" value="Submit" class="btn btn-primary my-3" style="width:200px">
+</form>
+    </div>
+<div class="col-sm-4 mt-5  text-center">
+    <img src="{{pet.image.url}}" width="300px" height="300px">
+</div>
+    </div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert("Pet Details has been Edited Successful");
+    window.location = ('{% url 'edit_pet' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, Try Again...");
+</script>
+{% endif %}
+
+{% endblock main-content %}
